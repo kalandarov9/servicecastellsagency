@@ -1,7 +1,8 @@
+
 import React, { useEffect, useState } from 'react';
 import { Task } from '../types';
 import { fetchBoardTasks } from '../services/mondayService';
-import { CheckCircle2, Circle, Clock, Calendar, DollarSign, Wallet } from 'lucide-react';
+import { CheckCircle2, Circle, Clock, Calendar, DollarSign, Wallet, Server } from 'lucide-react';
 
 interface ProgressViewProps {
   boardId?: string;
@@ -70,28 +71,38 @@ export const ProgressView: React.FC<ProgressViewProps> = ({ boardId = '123456' }
   return (
     <div className="w-full max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-500 pb-20">
       
-      {/* Financial Overview Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      {/* Financial Overview & Deployment Status */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div className="bg-white p-6 border border-[#E5E5E0] flex flex-col justify-between h-32 rounded-xl">
             <div className="flex items-center gap-2 text-gray-400">
                 <Wallet size={16} />
                 <span className="text-[10px] uppercase tracking-widest font-bold">Total Budget</span>
             </div>
-            <span className="text-4xl font-serif font-bold text-[#111111]">{formatter.format(totalBudget)}</span>
+            <span className="text-3xl font-serif font-bold text-[#111111]">{formatter.format(totalBudget)}</span>
         </div>
         <div className="bg-[#111111] p-6 border border-[#111111] flex flex-col justify-between h-32 text-white rounded-xl">
             <div className="flex items-center gap-2 text-gray-400">
                 <CheckCircle2 size={16} />
                 <span className="text-[10px] uppercase tracking-widest font-bold">Total Paid</span>
             </div>
-            <span className="text-4xl font-serif font-bold text-white">{formatter.format(paidAmount)}</span>
+            <span className="text-3xl font-serif font-bold text-white">{formatter.format(paidAmount)}</span>
         </div>
         <div className="bg-white p-6 border border-[#E5E5E0] flex flex-col justify-between h-32 rounded-xl">
             <div className="flex items-center gap-2 text-gray-400">
                 <Clock size={16} />
-                <span className="text-[10px] uppercase tracking-widest font-bold">Remaining Balance</span>
+                <span className="text-[10px] uppercase tracking-widest font-bold">Remaining</span>
             </div>
-            <span className="text-4xl font-serif font-bold text-gray-400">{formatter.format(remainingAmount)}</span>
+            <span className="text-3xl font-serif font-bold text-gray-400">{formatter.format(remainingAmount)}</span>
+        </div>
+        <div className="bg-emerald-50 p-6 border border-emerald-100 flex flex-col justify-between h-32 rounded-xl">
+            <div className="flex items-center gap-2 text-emerald-600/60">
+                <Server size={16} />
+                <span className="text-[10px] uppercase tracking-widest font-bold">Deployment</span>
+            </div>
+            <div className="flex flex-col">
+                <span className="text-xl font-bold text-emerald-700">Vercel Ready</span>
+                <span className="text-[9px] text-emerald-600 uppercase tracking-widest font-bold">CI/CD Active</span>
+            </div>
         </div>
       </div>
 
@@ -158,7 +169,7 @@ export const ProgressView: React.FC<ProgressViewProps> = ({ boardId = '123456' }
         {/* Footer info */}
         <div className="p-4 border-t border-[#E5E5E0] bg-[#FAFAFA] text-center">
             <p className="text-[10px] text-gray-400 uppercase tracking-widest">
-                Payments are processed via Stripe Invoice
+                Automated Deployment via Vercel Edge Network
             </p>
         </div>
 
