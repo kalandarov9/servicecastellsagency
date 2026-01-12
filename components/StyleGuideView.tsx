@@ -23,19 +23,23 @@ export const StyleGuideView: React.FC<StyleGuideViewProps> = ({ designSystem }) 
 
   const activeFonts = FONT_PAIRS[typographyIndex];
 
-  // Hardcoded styles for demonstration
+  // Logic for different visual "concepts"
   const concepts = {
     'Concept 1': {
       primary: '#0F4C81',
       surface: '#F8FAFC',
       label: 'Modern Professional',
-      defaultAccent: '#FF7A59'
+      defaultAccent: '#FF7A59',
+      borderRadius: '12px',
+      buttonShape: 'rounded-xl'
     },
     'Concept 2': {
       primary: '#1A1A1A',
       surface: '#FDFDFB',
       label: 'Premium / Luxury',
-      defaultAccent: '#C5A059'
+      defaultAccent: '#C5A059',
+      borderRadius: '9999px', // Pill shape for luxury feel
+      buttonShape: 'rounded-full'
     }
   };
 
@@ -221,13 +225,13 @@ export const StyleGuideView: React.FC<StyleGuideViewProps> = ({ designSystem }) 
              <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white border border-[#E5E5E0] rounded-2xl p-6 shadow-sm flex flex-col gap-4">
                     <button 
-                        className="w-full py-3 rounded-xl text-white text-xs font-bold transition-all transform active:scale-95 shadow-md" 
+                        className={`w-full py-3 ${currentTheme.buttonShape} text-white text-xs font-bold transition-all transform active:scale-95 shadow-md`} 
                         style={{ backgroundColor: currentTheme.primary }}
                     >
                         Primary Action
                     </button>
                     <button 
-                        className="w-full py-3 rounded-xl border-2 text-xs font-bold transition-all" 
+                        className={`w-full py-3 ${currentTheme.buttonShape} border-2 text-xs font-bold transition-all`} 
                         style={{ borderColor: accentColor, color: accentColor }}
                     >
                         Secondary CTA
@@ -236,7 +240,7 @@ export const StyleGuideView: React.FC<StyleGuideViewProps> = ({ designSystem }) 
                 <div className="bg-white border border-[#E5E5E0] rounded-2xl p-6 shadow-sm flex flex-col justify-center">
                     <div className="space-y-4">
                         <div className="flex items-center gap-3">
-                            <div className="w-5 h-5 rounded-md flex items-center justify-center text-white" style={{ backgroundColor: accentColor }}>
+                            <div className={`w-5 h-5 ${activeConcept === 'Concept 1' ? 'rounded-md' : 'rounded-full'} flex items-center justify-center text-white`} style={{ backgroundColor: accentColor }}>
                                 <Check size={12} strokeWidth={3} />
                             </div>
                             <span className="text-xs font-medium text-[#111111]">Enabled State</span>
@@ -286,7 +290,7 @@ export const StyleGuideView: React.FC<StyleGuideViewProps> = ({ designSystem }) 
                     <span>About</span>
                  </div>
                  <button 
-                    className="px-5 py-2.5 rounded-xl text-[10px] font-bold text-white transition-all duration-500 shadow-lg" 
+                    className={`px-5 py-2.5 ${currentTheme.buttonShape} text-[10px] font-bold text-white transition-all duration-500 shadow-lg`} 
                     style={{ backgroundColor: accentColor, boxShadow: `0 10px 15px -3px ${accentColor}44` }}
                  >
                     BOOK ONLINE
@@ -296,26 +300,26 @@ export const StyleGuideView: React.FC<StyleGuideViewProps> = ({ designSystem }) 
             {/* Hero */}
             <header className="px-8 py-20 flex flex-col items-center text-center transition-all duration-500">
                  <div 
-                    className="px-4 py-1 rounded-full border text-[9px] font-bold uppercase tracking-[0.2em] mb-8 transition-all duration-500" 
+                    className={`px-4 py-1 ${currentTheme.buttonShape} border text-[9px] font-bold uppercase tracking-[0.2em] mb-8 transition-all duration-500`} 
                     style={{ borderColor: accentColor + '44', color: accentColor, backgroundColor: accentColor + '08' }}
                  >
                     Elite Service in Orange County
                  </div>
                  <h1 className="text-4xl md:text-6xl font-bold mb-8 max-w-2xl leading-[1.1] transition-all duration-500" style={{ color: previewStyles.text, fontFamily: activeFonts.heading }}>
-                    Reliable & Caring <br/><span style={{ color: currentTheme.primary }}>Home Service.</span>
+                    Reliable & Caring <br/><span style={{ color: accentColor }}>Home Service.</span>
                  </h1>
                  <p className="text-sm md:text-base mb-10 max-w-lg font-light leading-relaxed transition-colors duration-500" style={{ color: previewStyles.subtext }}>
                     Expert HVAC installation, repair and white-glove appliance services for luxury residential properties.
                  </p>
                  <div className="flex gap-4">
                     <button 
-                        className="px-8 py-4 rounded-2xl font-bold text-xs text-white shadow-xl transition-all duration-500 active:scale-95" 
+                        className={`px-8 py-4 ${currentTheme.buttonShape} font-bold text-xs text-white shadow-xl transition-all duration-500 active:scale-95`} 
                         style={{ backgroundColor: currentTheme.primary }}
                     >
                         Schedule Service
                     </button>
                     <button 
-                        className="px-8 py-4 rounded-2xl font-bold text-xs border transition-all duration-500"
+                        className={`px-8 py-4 ${currentTheme.buttonShape} font-bold text-xs border transition-all duration-500`}
                         style={{ backgroundColor: isDarkMode ? 'transparent' : '#FFFFFF', borderColor: isDarkMode ? 'rgba(255,255,255,0.1)' : '#E5E5E0', color: previewStyles.text }}
                     >
                         Our Process
@@ -329,14 +333,14 @@ export const StyleGuideView: React.FC<StyleGuideViewProps> = ({ designSystem }) 
                      {[1, 2].map((i) => (
                         <div 
                           key={i} 
-                          className="group p-8 rounded-[2rem] border transition-all duration-500 hover:shadow-2xl hover:shadow-black/20"
+                          className={`group p-8 ${activeConcept === 'Concept 1' ? 'rounded-[2rem]' : 'rounded-3xl'} border transition-all duration-500 hover:shadow-2xl hover:shadow-black/20`}
                           style={{ 
                             backgroundColor: previewStyles.card, 
                             borderColor: previewStyles.border 
                           }}
                         >
                              <div 
-                                className="w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 shadow-md" 
+                                className={`w-12 h-12 ${activeConcept === 'Concept 1' ? 'rounded-2xl' : 'rounded-full'} flex items-center justify-center mb-6 transition-all duration-500 shadow-md`} 
                                 style={{ backgroundColor: i === 1 ? currentTheme.primary : accentColor }}
                              >
                                  <div className="w-5 h-5 border-2 border-white/30 rounded-full"></div>
