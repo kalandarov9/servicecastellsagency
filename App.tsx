@@ -126,7 +126,8 @@ const App: React.FC = () => {
                <NavItem stage={Stage.SITEMAP} icon={Layout} label="Plan" />
                <NavItem stage={Stage.WIREFRAME} icon={PenTool} label="Structure" />
                <NavItem stage={Stage.STYLE_GUIDE} icon={Palette} label="Design" />
-               <NavItem stage={Stage.PROGRESS} icon={BarChart3} label="Progress" />
+               {/* Roadmap is hidden but kept in code for future use */}
+               {/* <NavItem stage={Stage.PROGRESS} icon={BarChart3} label="Progress" /> */}
             </div>
 
             <div className="flex items-center gap-2 shrink-0">
@@ -170,7 +171,7 @@ const App: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl px-4">
               
               <div 
                 onClick={() => setCurrentStage(Stage.SITEMAP)}
@@ -220,6 +221,8 @@ const App: React.FC = () => {
                 </div>
               </div>
 
+               {/* Roadmap Card is hidden but kept in code for future use */}
+               {/* 
                <div 
                  onClick={() => setCurrentStage(Stage.PROGRESS)}
                  className="group cursor-pointer bg-[#111111] p-8 hover:-translate-y-1 transition-all duration-300 rounded-2xl flex flex-col h-64 justify-between shadow-xl"
@@ -234,12 +237,13 @@ const App: React.FC = () => {
                     <h2 className="text-2xl font-bold text-white font-serif mb-2">Roadmap</h2>
                     <p className="text-white/60 text-xs">Track every milestone.</p>
                 </div>
-              </div>
+              </div> 
+              */}
 
             </div>
 
             {/* DevOps Integration Info (Reassurance for client) */}
-            <div className="mt-12 w-full max-w-6xl px-4">
+            <div className="mt-12 w-full max-w-5xl px-4">
                 <div className="bg-white/50 backdrop-blur border border-[#E5E5E0] rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex items-center gap-4">
                         <div className="p-2 bg-white rounded-lg border border-[#E5E5E0]">
