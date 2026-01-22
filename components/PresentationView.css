@@ -1,0 +1,611 @@
+/* Импорт шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
+
+/* Глобальный box-sizing для всех элементов внутри презентации */
+#concept-presentation-root *,
+#concept-presentation-root *::before,
+#concept-presentation-root *::after,
+#concept-presentation-root-2 *,
+#concept-presentation-root-2 *::before,
+#concept-presentation-root-2 *::after {
+  box-sizing: border-box;
+}
+
+/* Основной контейнер-обертка */
+#concept-presentation-root {
+  width: 100%;
+  max-width: 1280px;
+  /* Base width */
+  margin: 0 auto;
+  position: relative;
+  background-color: #020617;
+  /* Navy Background */
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  /* aspect-ratio handled by JS resizing usually, but we can set min-height */
+  box-sizing: border-box;
+}
+
+/* Второй слайдер - идентичные стили */
+#concept-presentation-root-2 {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  background-color: #020617;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  box-sizing: border-box;
+  min-height: 720px;
+}
+
+/* Область масштабирования */
+#concept-scaler {
+  width: 1280px;
+  height: 720px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Область масштабирования для второго слайдера */
+#concept-scaler-2 {
+  width: 1280px;
+  height: 720px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Слайды для второго слайдера */
+#concept-presentation-root-2 .slide-container {
+  width: 1280px;
+  height: 720px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  background-color: #020617;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  z-index: 1;
+  overflow: hidden;
+}
+
+#concept-presentation-root-2 .slide-container.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+}
+
+/* Фон-текстура для второго слайдера */
+#concept-presentation-root-2 .slide-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100px 100px;
+  opacity: 0.4;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* --- Стили Слайдов --- */
+
+.slide-container {
+  width: 1280px;
+  height: 720px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  background-color: #020617;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.slide-container.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+}
+
+/* Фон-текстура */
+.slide-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100px 100px;
+  opacity: 0.4;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.slide-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Типографика */
+#concept-presentation-root h1,
+#concept-presentation-root h2,
+#concept-presentation-root h3 {
+  color: #f8fafc;
+  font-weight: 700;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+#concept-presentation-root h1 {
+  font-size: 80px;
+  line-height: 0.9;
+}
+
+.slide-title {
+  font-size: 42px;
+  margin-bottom: 25px;
+  border-left: 6px solid #f97316;
+  padding-left: 25px;
+  width: 100%;
+}
+
+#concept-presentation-root p,
+#concept-presentation-root li {
+  color: #cbd5e1;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+  /* Чуть плотнее для большего текста */
+  font-size: 17px;
+}
+
+#concept-presentation-root ul li {
+  margin-bottom: 12px;
+}
+
+.accent-text {
+  color: #f97316;
+}
+
+/* Стили для второго слайдера - идентичны первому */
+#concept-presentation-root-2 {
+  background-color: #020617;
+}
+
+#concept-presentation-root-2 .slide-container {
+  background-color: #020617;
+}
+
+/* Типографика для второго слайдера - идентична первому */
+#concept-presentation-root-2 h1,
+#concept-presentation-root-2 h2,
+#concept-presentation-root-2 h3 {
+  color: #f8fafc;
+  font-weight: 700;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+#concept-presentation-root-2 h1 {
+  font-size: 80px;
+  line-height: 0.9;
+}
+
+#concept-presentation-root-2 .slide-title {
+  font-size: 42px;
+  margin-bottom: 25px;
+  border-left: 6px solid #f97316;
+  padding-left: 25px;
+  width: 100%;
+}
+
+#concept-presentation-root-2 p,
+#concept-presentation-root-2 li {
+  color: #cbd5e1;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.5;
+  font-size: 17px;
+}
+
+#concept-presentation-root-2 ul li {
+  margin-bottom: 12px;
+}
+
+#concept-presentation-root-2 .accent-text {
+  color: #f97316;
+}
+
+#concept-presentation-root-2 .mono-text {
+  font-family: 'JetBrains Mono', monospace;
+  color: #f97316;
+}
+
+/* Таблицы для второго слайдера */
+#concept-presentation-root-2 .comparison-table th {
+  text-align: left;
+  padding: 15px 20px;
+  border-bottom: 2px solid #334155;
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  color: #94a3b8;
+}
+
+#concept-presentation-root-2 .comparison-table td {
+  padding: 20px;
+  border-bottom: 1px solid #334155;
+  font-size: 18px;
+  color: #cbd5e1;
+  vertical-align: top;
+}
+
+#concept-presentation-root-2 .comparison-table .our-column {
+  background: rgba(249, 115, 22, 0.1);
+  border-left: 2px solid #f97316;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Persona Card для второго слайдера */
+#concept-presentation-root-2 .persona-card {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #f97316;
+  padding: 50px;
+}
+
+#concept-presentation-root-2 .persona-icon {
+  font-size: 80px;
+  color: #f97316;
+  border: 2px solid #f97316;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Placeholders для второго слайдера */
+#concept-presentation-root-2 .placeholder-box {
+  border: 2px dashed #f97316;
+  background: rgba(249, 115, 22, 0.05);
+  color: #f97316;
+}
+
+#concept-presentation-root-2 .placeholder-label {
+  background: #020617;
+  border: 1px solid #f97316;
+  color: #f97316;
+}
+
+/* Roadmap для второго слайдера */
+#concept-presentation-root-2 .roadmap-dot {
+  background: #020617;
+  border: 2px solid #f97316;
+  color: #f97316;
+}
+
+#concept-presentation-root-2 .roadmap-step.active .roadmap-dot {
+  background: #f97316;
+  color: #000;
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+}
+
+/* Tiles для второго слайдера */
+#concept-presentation-root-2 .tile .icon {
+  color: #f97316;
+}
+
+/* Кнопки навигации для второго слайдера */
+#concept-presentation-root-2 .pres-btn {
+  background: #020617;
+  border: 1px solid #f97316;
+  color: #f97316;
+}
+
+#concept-presentation-root-2 .pres-btn:hover {
+  background: #f97316;
+  color: #000;
+}
+
+#concept-presentation-root-2 .pres-counter {
+  color: #64748b;
+}
+
+#concept-presentation-root-2 .current-slide {
+  color: #f97316;
+  font-weight: bold;
+}
+
+.mono-text {
+  font-family: 'JetBrains Mono', monospace;
+  color: #f97316;
+}
+
+/* Сетки */
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  width: 100%;
+  max-width: 100%;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.two-column.tiled {
+  align-items: stretch;
+}
+
+.two-column.tiled>div {
+  background-color: rgba(30, 41, 59, 0.5);
+  border: 1px solid #334155;
+  padding: 35px;
+}
+
+/* Таблица сравнения */
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.comparison-table th {
+  text-align: left;
+  padding: 15px 20px;
+  border-bottom: 2px solid #334155;
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  color: #94a3b8;
+}
+
+.comparison-table td {
+  padding: 20px;
+  border-bottom: 1px solid #334155;
+  font-size: 18px;
+  color: #cbd5e1;
+  vertical-align: top;
+}
+
+.comparison-table .our-column {
+  background: rgba(249, 115, 22, 0.1);
+  border-left: 2px solid #f97316;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Persona Card */
+.persona-card {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid #f97316;
+  padding: 50px;
+}
+
+.persona-icon {
+  font-size: 80px;
+  color: #f97316;
+  border: 2px solid #f97316;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Roadmap */
+.roadmap-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.roadmap-container::before {
+  content: '';
+  position: absolute;
+  top: 25px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #334155;
+  z-index: 0;
+}
+
+.roadmap-step {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  width: 18%;
+}
+
+.roadmap-dot {
+  width: 50px;
+  height: 50px;
+  background: #020617;
+  border: 2px solid #f97316;
+  color: #f97316;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+  font-family: 'JetBrains Mono';
+  font-weight: bold;
+}
+
+.roadmap-step.active .roadmap-dot {
+  background: #f97316;
+  color: #000;
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+}
+
+/* Placeholders */
+.placeholder-box {
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  border: 2px dashed #f97316;
+  background: rgba(249, 115, 22, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 30px;
+  color: #f97316;
+  font-family: 'JetBrains Mono', monospace;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Отступы для placeholder-box в правой колонке, чтобы не касались кнопок навигации */
+.two-column > .placeholder-box {
+  max-height: calc(100% - 120px);
+  max-width: calc(100% - 120px);
+  align-self: flex-start;
+  margin-top: 0;
+}
+
+.placeholder-label {
+  background: #020617;
+  padding: 8px 16px;
+  border: 1px solid #f97316;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.placeholder-desc {
+  font-size: 14px;
+  color: #94a3b8;
+  max-width: 90%;
+}
+
+/* Tiled Content */
+.tiled-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.tile {
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid #334155;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.tile .icon {
+  color: #f97316;
+  font-size: 32px;
+}
+
+/* Controls */
+.pres-controls {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  gap: 15px;
+  z-index: 100;
+  box-sizing: border-box;
+  max-width: calc(100% - 60px);
+  overflow: visible;
+}
+
+.pres-btn {
+  background: #020617;
+  border: 1px solid #f97316;
+  color: #f97316;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'JetBrains Mono';
+  font-size: 18px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* Fix for font awesome icon alignment in button if needed */
+.pres-btn i {
+  pointer-events: none;
+}
+
+.pres-btn:hover {
+  background: #f97316;
+  color: #000;
+}
+
+.pres-counter {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  color: #64748b;
+  font-family: 'JetBrains Mono';
+  font-size: 14px;
+  z-index: 100;
+  box-sizing: border-box;
+  max-width: calc(100% - 200px);
+  overflow: hidden;
+}
+
+.current-slide {
+  color: #f97316;
+  font-weight: bold;
+}
